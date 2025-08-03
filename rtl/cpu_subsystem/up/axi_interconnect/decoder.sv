@@ -5,15 +5,15 @@ module decoder #(
         {32'h0000_0000, 32'h0001_FFFF},
         {32'h0002_0000, 32'h0002_FFFF}
     },
-    localparam int unsigned SelWidth = $clog2(NumSlaves) == 0 ? 1 : $clog2(NumSlaves) // TODO: delete?
+    localparam int unsigned SelWidth = (NumSlaves > 1) ? $clog2(NumSlaves) : 1
 ) (
-    input  [AddrWidth-1:0]         addr_i,
-    output [SelWidth-1:0] sel_o,
-    output                         error_o
+    input  [AddrWidth-1:0] addr_i,
+    output [SelWidth-1:0]  sel_o,
+    output                 error_o
 );
-    logic [NumSlaves-1:0]         slave_selected;
-    logic [SelWidth-1:0] sel;
-    logic                         error;
+    logic [NumSlaves-1:0] slave_selected;
+    logic [SelWidth-1:0]  sel;
+    logic                 error;
 
     assign error_o = error;
     assign sel_o   = sel;
