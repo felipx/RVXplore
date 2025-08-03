@@ -1,11 +1,11 @@
 module demux #(
     parameter int unsigned DataWidth  = 32,
     parameter int unsigned NumOutputs = 8,
-    localparam int unsigned SelWidth = $clog2(NumOutputs) == 0 ? 1 : $clog2(NumOutputs) // TODO: delete?
+    localparam int unsigned SelWidth = (NumOutputs > 1) ? $clog2(NumOutputs) : 1
 ) (
-    input  [DataWidth-1:0]          data_i,
-    input  [SelWidth-1:0] sel_i,
-    output [DataWidth-1:0]          data_o [NumOutputs]
+    input  [DataWidth-1:0] data_i,
+    input  [SelWidth-1:0]  sel_i,
+    output [DataWidth-1:0] data_o [NumOutputs]
 );
 
     logic [DataWidth-1:0] dout [NumOutputs];

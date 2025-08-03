@@ -1,6 +1,6 @@
 module rr_arbiter #(
     parameter int unsigned Width = 4,
-    localparam int unsigned BinWidth = $clog2(Width) == 0 ? 1 : $clog2(Width) // TODO: delete?
+    localparam int unsigned BinWidth = (Width > 1) ? $clog2(Width) : 1
 ) (
     input                 clk,
     input                 rst_n,
